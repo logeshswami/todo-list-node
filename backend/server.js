@@ -2,6 +2,7 @@ const express = require('express');
 const {sequelize, authenticateDB } = require('./config/db');
 const {router} = require('./routes/todoRoutes');
 const {Todo }= require("./models/todo");
+const cors = require("cors");
 //const validate = require("./middlewares/validate");
 require('dotenv').config();
 
@@ -10,7 +11,10 @@ const PORT = process.env.PORT || 3000;
 
 // middlewares
 app.use(express.json());
+//app.use(express.urlencoded({ extended: true })) no urlencoded routes till now
+app.use(cors());
 app.use("/",router);
+
 
 // Sync database and start the server on startup
 (async () => {
