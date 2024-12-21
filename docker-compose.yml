@@ -23,6 +23,16 @@ services:
     depends_on:
       - postgres
     restart: unless-stopped
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: frontend_todo
+    ports:
+      - "4173:4173"
+    depends_on:
+      - backend
+    restart: unless-stopped
     
 
 volumes:
